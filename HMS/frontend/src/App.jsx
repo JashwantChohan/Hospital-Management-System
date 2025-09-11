@@ -15,8 +15,8 @@ const App = () => {
 
     return (
         <Router>
-            <div className="flex flex-column mx-auto py-4 px-10 bg-[#F5EEE6]">
-                <h1 style={{ color: "red" }}>
+            <div className="container bg-gray-100 ">
+                <h1 className="text-green-600 text-3xl mb-4 font-bold" >
                     Hospital Management App
                 </h1>
                 <nav className="bg-[#00a7aa] p-2.5 rounded-xl ">

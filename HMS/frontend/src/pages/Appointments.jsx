@@ -1,7 +1,7 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import AppointmnetCard from '../components/AppointmentCard'
-// import './Appointment.css'
+import "../components/AppointmentCard.css"
 import Patients from './Patients';
 
 const Appointments = () => {
@@ -69,24 +69,24 @@ const Appointments = () => {
     }
 
     return (
-        <div>
-            <div>
-                <div>
-                    <h4>{isEditeMode ? "Edit Appointment" : 'Add new Appointment '}</h4>
+        <div className='flex-row ' style={{ width: "100%" }}>
+            <div className='flex-column  '>
+                <div className='add-form flex flex-col h-screen w-[39vw] overflow-hidden '>
                     <form
-                        className='appointment-form'
+                        className='appointment-form w-[38vw] mx-0 p-5 border-[1px] border-[#ddd]  rounded-[8px] bg-[#fff] shadow-md'
                         onSubmit={isEditeMode ? (e) => handleAddAppointment(selectedAppointment._id, e) : handleAddAppointment}
                     >
-                        <label>Patients Name:</label>
-                        <input type="text" value={isEditeMode ? selectedAppointment.patientsName : newAppointment.patientsName}
+                        <h4 className='text-2xl mb-5'>{isEditeMode ? "Edit Appointment" : 'Add New Appointment'}</h4>
+                        <label className='block mb-2'>Patients Name:</label>
+                        <input className='w-full p-2 mb-4 border border-gray-300 rounded-[4px]' type="text" value={isEditeMode ? selectedAppointment.patientsName : newAppointment.patientsName}
                             onChange={(e) =>
                                 isEditeMode ? setSelectedAppointment({ ...selectedAppointment, patientsName: e.target.value })
                                     : setAppointments({ ...newAppointment, patientsName: e.target.value })
                             }
                         />
 
-                        <label>Doctor Name</label>
-                        <input type="text" value={isEditeMode ? selectedAppointment.DoctorsName : newAppointment.DoctorsName}
+                        <label className='block mb-2'>Doctor Name</label>
+                        <input className='w-full p-2 mb-4 border border-gray-300 rounded-[4px]' type="text" value={isEditeMode ? selectedAppointment.DoctorsName : newAppointment.DoctorsName}
                             onChange={(e) =>
                                 isEditeMode
                                     ? setSelectedAppointment({ ...selectedAppointment, DoctorsName: e.target.value })
@@ -94,8 +94,8 @@ const Appointments = () => {
                             }
                         />
 
-                        <label >Date:</label>
-                        <input type="date"
+                        <label className='block mb-2' >Date:</label>
+                        <input className='w-full p-2 mb-4 border border-gray-300 rounded-[4px]' type="date"
                             value={isEditeMode ? selectedAppointment.date : newAppointment.date}
                             onChange={(e) =>
                                 isEditeMode ?
@@ -104,17 +104,17 @@ const Appointments = () => {
                             }
                         />
 
-                        <button type='submit'>{isEditeMode ? 'Update Appointment' : 'Add Appointment'} </button>
+                        <button className='bg-blue-500 text-[#fff] border-none px-2.5 py-5 rounded-[4px] cursor-pointer transition-colors duration-300 ease-linear hover:bg-[#0056b3] ' type='submit'>{isEditeMode ? 'Update Appointment' : 'Add Appointment'} </button>
                     </form>
                 </div>
             </div>
-            <div className='appoitnment'>
+            <div className='appoitnments flex flex-col items-center min-h-screen w-[30vw]'>
                 <h3>Appointments({appointments.length})</h3>
-                <div className='appointment-list'>
-                    {appointments.map(appointments => (
+                <div className='appointment-list flex flex-col items-center mb-[250px]'>
+                    {appointments.map(appointment => (
                         <AppointmnetCard
-                            key={appointments._id}
-                            appointment={appointments}
+                            key={appointment._id}
+                            appointment={appointment}
                             onEdit={handleEditAppointment}
                             onDelete={handleDeleteAppointment}
                         />

@@ -1,8 +1,9 @@
+/* App.css  */
 .container {
   max-width: 100vw;
   margin: 0 auto;
   padding: 20px 150px;
-  background-color: #F5EEE6;
+  background-color: #f7fafc;
 
 }
 
@@ -40,6 +41,7 @@ a:hover {
   color: #ffd700;
 }
 
+/* FLEX  */
 .flex-column {
   display: flex;
   flex-direction: column;
