@@ -13,7 +13,7 @@ const Doctors = () => {
         axios
             .get('http://localhost:5000/doctors')
             .then(response => setDoctors(response.data))
-            .catch(error, console.error('Error fetching Doctors', error))
+            .catch(error => console.error('Error fetching Doctors', error))
     }, [])
 
     const handleAddDoctor = (e) => {
@@ -67,14 +67,16 @@ const Doctors = () => {
                     <label> Name:</label>
                     <input type="text"
                         value={isEditMode ? selectedDoctor.name : newDoctor.name}
-                        onChange={
-                            isEditMode ? setSelectedDoctor({ ...selectedDoctor, name: e.target.value }) : setNewDoctor({ ...newDoctor, name: e.target.value })
+                        onChange={(e) =>
+                            isEditMode ? setSelectedDoctor({ ...selectedDoctor, name: e.target.value })
+                                : setNewDoctor({ ...newDoctor, name: e.target.value })
                         }
                     />
                     <br />
+                    <label>Specialty: </label>
                     <input type="text"
                         value={isEditMode ? selectedDoctor.speciality : newDoctor.speciality}
-                        onChange={
+                        onChange={(e) =>
                             isEditMode ? setSelectedDoctor({ ...selectedDoctor, speciality: e.target.value }) : setNewDoctor({ ...newDoctor, speciality: e.target.value })
                         }
                     />
