@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import AppointmnetCard from '../components/AppointmentCard'
 // import "../components/AppointmentCard.css"
-
 import Patients from './Patients';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,8 +12,8 @@ const Appointments = () => {
         DoctorsName: '',
         date: ''
     })
-    const [selectedAppointment, setSelectedAppointment] = useState([null])
-    const [isEditeMode, setIsEditMode] = useState(false)
+    const [selectedAppointment, setSelectedAppointment] = useState(null)
+    const [isEditMode, setIsEditMode] = useState(false)
 
     useEffect(() => {
         axios.get('http://localhost:5000/appointments')
@@ -41,10 +40,10 @@ const Appointments = () => {
     const handleUpdateAppointment = (id, e) => {
         e.preventDefault()
 
-        axios.post(`http://localhost:5000/appointments/update/${id}`, selectedAppointments)
+        axios.post(`http://localhost:5000/appointments/update/${id}`, selectedAppointment)
             .then(response => {
                 console.log(response.data)
-                const updateApp = { ...selectedAppointments, _id: id }
+                const updateApp = { ...selectedAppointment, _id: id }
                 setAppointments(
                     appointments.map(appointments =>
                         appointments._id === id ? updateApp : appointments
@@ -77,21 +76,22 @@ const Appointments = () => {
                 <div className='add-form flex flex-col h-screen w-[39vw] overflow-hidden '>
                     <form
                         className='appointment-form w-[38vw] mx-0 p-5 border-[1px] border-[#ddd]  rounded-[8px] bg-[#fff] shadow-md'
-                        onSubmit={isEditeMode ? (e) => handleAddAppointment(selectedAppointment._id, e) : handleAddAppointment}
+                       onSubmit={isEditMode ? (e) => handleUpdateAppointment(selectedAppointment._id, e) : handleAddAppointment}
+
                     >
-                        <h4 className='text-2xl mb-5'>{isEditeMode ? "Edit Appointment" : 'Add New Appointment'}</h4>
+                        <h4 className='text-2xl mb-5'>{isEditMode ? "Edit Appointment" : 'Add New Appointment'}</h4>
                         <label className='block mb-2'>Patients Name:</label>
-                        <input className='w-full p-2 mb-4 border border-blue-500 rounded-[4px]' type="text" value={isEditeMode ? selectedAppointment.patientsName : newAppointment.patientsName}
+                        <input className='w-full p-2 mb-4 border border-blue-500 rounded-[4px]' type="text" value={isEditMode ? selectedAppointment.patientsName : newAppointment.patientsName}
                             onChange={(e) =>
-                                isEditeMode ? setSelectedAppointment({ ...selectedAppointment, patientsName: e.target.value })
-                                    : setAppointments({ ...newAppointment, patientsName: e.target.value })
+                                isEditMode ? setSelectedAppointment({ ...selectedAppointment, patientsName: e.target.value })
+                                    : setNewAppointment({ ...newAppointment, patientsName: e.target.value })
                             }
                         />
 
                         <label className='block mb-2'>Doctor Name</label>
-                        <input className='w-full p-2 mb-4 border border-blue-500 rounded-[4px]' type="text" value={isEditeMode ? selectedAppointment.DoctorsName : newAppointment.DoctorsName}
+                        <input className='w-full p-2 mb-4 border border-blue-500 rounded-[4px]' type="text" value={isEditMode ? selectedAppointment.DoctorsName : newAppointment.DoctorsName}
                             onChange={(e) =>
-                                isEditeMode
+                                isEditMode
                                     ? setSelectedAppointment({ ...selectedAppointment, DoctorsName: e.target.value })
                                     : setNewAppointment({ ...newAppointment, DoctorsName: e.target.value })
                             }
@@ -99,15 +99,15 @@ const Appointments = () => {
 
                         <label className='block mb-2' >Date:</label>
                         <input className='w-full p-2 mb-4 border border-blue-500 rounded-[4px]' type="date"
-                            value={isEditeMode ? selectedAppointment.date : newAppointment.date}
+                            value={isEditMode ? selectedAppointment.date : newAppointment.date}
                             onChange={(e) =>
-                                isEditeMode ?
+                                isEditMode ?
                                     setSelectedAppointment({ ...selectedAppointment, date: e.target.value })
                                     : setNewAppointment({ ...newAppointment, date: e.target.value })
                             }
                         />
 
-                        <button className='bg-blue-500 text-[#fff] border-none px-2.5 py-5 rounded-[4px] cursor-pointer transition-colors duration-300 ease-linear hover:bg-[#0056b3] ' type='submit'>{isEditeMode ? 'Update Appointment' : 'Add Appointment'} </button>
+                        <button className='bg-blue-500 text-[#fff] border-none px-2.5 py-5 rounded-[4px] cursor-pointer transition-colors duration-300 ease-linear hover:bg-[#0056b3] ' type='submit'>{isEditMode ? 'Update Appointment' : 'Add Appointment'} </button>
                     </form>
                 </div>
             </div>

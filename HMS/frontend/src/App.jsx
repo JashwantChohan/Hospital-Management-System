@@ -1,12 +1,12 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-    Navigate,
-    useLocation,
-    useNavigate
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate
 } from "react-router-dom";
 import Appointments from "./pages/Appointments";
 import Doctors from "./pages/Doctors";
@@ -20,8 +20,8 @@ const Navbar = () => {
   const isLinkActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn"); // clear login state
-    navigate("/login"); // redirect to login
+    localStorage.removeItem("isLoggedIn"); 
+    navigate("/login"); 
   };
 
   return (
@@ -30,9 +30,8 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/appointments"
-            className={`no-underline font-bold ${
-              isLinkActive("/appointments") ? "text-[#ffd700]" : "text-white"
-            }`}
+            className={`no-underline font-bold ${isLinkActive("/appointments") ? "text-[#ffd700]" : "text-white"
+              }`}
           >
             Appointments
           </Link>
@@ -40,9 +39,8 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/doctors"
-            className={`no-underline font-bold ${
-              isLinkActive("/doctors") ? "text-[#ffd700]" : "text-white"
-            }`}
+            className={`no-underline font-bold ${isLinkActive("/doctors") ? "text-[#ffd700]" : "text-white"
+              }`}
           >
             Doctors
           </Link>
@@ -50,16 +48,14 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/patients"
-            className={`no-underline font-bold ${
-              isLinkActive("/patients") ? "text-[#ffd700]" : "text-white"
-            }`}
+            className={`no-underline font-bold ${isLinkActive("/patients") ? "text-[#ffd700]" : "text-white"
+              }`}
           >
             Patients
           </Link>
         </li>
       </ul>
 
-      {/* Logout button */}
       <button
         onClick={handleLogout}
         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
@@ -72,60 +68,60 @@ const Navbar = () => {
 
 
 const PrivateRoute = ({ children }) => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    return isLoggedIn ? children : <Navigate to="/login" />;
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  return isLoggedIn ? children : <Navigate to="/login" />;
 };
 
 const App = () => {
-    return (
-        <Router>
-            <div className="container bg-gray-100 min-h-screen">
-                <h1 className="text-green-600 text-3xl mb-4 font-bold text-center">
-                    Hospital Management App
-                </h1>
+  return (
+    <Router>
+      <div className="container bg-gray-100 min-h-screen">
+        <h1 className="text-green-600 text-3xl mb-4 font-bold text-center">
+          Hospital Management App
+        </h1>
 
-                <Routes>
-                    <Route path="/login" element={<Login />} />
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-                    <Route
-                        path="/appointments"
-                        element={
-                            <>
-                                <Navbar />
-                                <PrivateRoute>
-                                    <Appointments />
-                                </PrivateRoute>
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/doctors"
-                        element={
-                            <>
-                                <Navbar />
-                                <PrivateRoute>
-                                    <Doctors />
-                                </PrivateRoute>
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/patients"
-                        element={
-                            <>
-                                <Navbar />
-                                <PrivateRoute>
-                                    <Patients />
-                                </PrivateRoute>
-                            </>
-                        }
-                    />
+          <Route
+            path="/appointments"
+            element={
+              <>
+                <Navbar />
+                <PrivateRoute>
+                  <Appointments />
+                </PrivateRoute>
+              </>
+            }
+          />
+          <Route
+            path="/doctors"
+            element={
+              <>
+                <Navbar />
+                <PrivateRoute>
+                  <Doctors />
+                </PrivateRoute>
+              </>
+            }
+          />
+          <Route
+            path="/patients"
+            element={
+              <>
+                <Navbar />
+                <PrivateRoute>
+                  <Patients />
+                </PrivateRoute>
+              </>
+            }
+          />
 
-                    <Route path="/" element={<Navigate to="/login" />} />
-                </Routes>
-            </div>
-        </Router>
-    );
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 };
 
 export default App;
