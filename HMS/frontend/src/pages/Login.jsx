@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
-const login = () => {
+const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
@@ -11,7 +11,7 @@ const login = () => {
 
         if (username === "admin" && password === "admin123") {
             localStorage.setItem("isLoggedIn", true);
-            navigate("/appointments");
+            navigate("/dashboard");
         } else {
             alert("Invalid credentials");
         }
@@ -48,4 +48,4 @@ const login = () => {
     );
 }
 
-export default login;
+export default Login;
