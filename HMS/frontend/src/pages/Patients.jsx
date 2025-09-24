@@ -52,7 +52,7 @@ const Patients = () => {
 
     return (
         <div className="main-patient-container flex flex-wrap justify-center items-start">
-            {/* Form Section */}
+           
             <div className="form-sections bg-[#fff] border-2 border-gray-300 rounded-[8px] p-4 w-[45%] mb-[306px] shadow-md">
                 <h4 className="mb-4 text-center text-2xl">{isEditMode ? 'Edit Patient' : 'Add New Patient'}</h4>
                 <form className="flex flex-col" onSubmit={isEditMode ? (e) => handleUpdatePatient(selectedPatient._id, e) : handleAddPatient}>
@@ -91,14 +91,13 @@ const Patients = () => {
                     />
                     <button
                         type="submit"
-                        className="self-start p-2 bg-[#007bff] text-white rounded-[4px] cursor-pointer hover:bg-[#0056b3]"
+                        className="self-start p-2 bg-[#007bff] text-white rounded-[4px] cursor-pointer hover:bg-[#0056b3] transition-color duration-300 ease-in-out"
                     >
                         {isEditMode ? 'Update Patient' : 'Add Patient'}
                     </button>
                 </form>
             </div>
 
-            {/* Patients List Section */}
             <div className="patients-section w-[45%] h-screen ml-4">
                 <h3 className="text-center">Patients ({patients.length})</h3>
                 <div className="patient-list mt-4">

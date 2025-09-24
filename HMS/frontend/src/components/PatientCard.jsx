@@ -6,13 +6,13 @@ const PatientCard = ({ patient, onEdit, onDelete }) => {
             <p className="m-0 font-semibold">{patient.name} - Age: {patient.age}, Gender: {patient.gender}</p>
             <div className="btn-container flex justify-between w-full mt-2">
                 <button
-                    className="cursor-pointer bg-[#007bff] text-white border-none rounded-[4px] p-2 hover:bg-[#0056b3]"
+                    className="cursor-pointer bg-[#007bff] text-white border-none rounded-[4px] p-2 hover:bg-[#0056b3] transition-color duration-300 ease-in-out"
                     onClick={() => onEdit(patient)}
                 >
                     Edit
                 </button>
                 <button
-                    className="cursor-pointer bg-[#007bff] text-white border-none rounded-[4px] p-2 hover:bg-[#0056b3]"
+                    className="cursor-pointer bg-[#007bff] text-white border-none rounded-[4px] p-2 hover:bg-[#0056b3] transition-color duration-300 ease-in-out"
                     onClick={() => onDelete(patient._id)}
                 >
                     Delete

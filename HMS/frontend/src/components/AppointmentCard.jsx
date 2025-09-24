@@ -21,13 +21,13 @@ const AppointmentCard = ({ appointment, onEdit, onDelete }) => {
       </p>
       <div className="btn-container mt-3 flex gap-2">
         <button
-          className="bg-[#007bff] text-[#fff] px-3 py-2 rounded hover:bg-[#0056b3] transition"
+          className="bg-[#007bff] text-[#fff] px-3 py-2 rounded hover:bg-[#0056b3] transition transition-color duration-300 ease-in-out"
           onClick={() => onEdit(appointment)}
         >
           Edit
         </button>
         <button
-          className="bg-red-500 text-[#fff] px-3 py-2 rounded hover:bg-red-700 transition"
+          className="bg-red-500 text-[#fff] px-3 py-2 rounded hover:bg-red-700 transition transition-color duration-300 ease-in-out"
           onClick={() => onDelete(appointment._id)}
         >
           Delete
