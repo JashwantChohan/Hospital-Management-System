@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
-const login = () => {
+const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
@@ -11,7 +11,7 @@ const login = () => {
 
         if (username === "admin" && password === "admin123") {
             localStorage.setItem("isLoggedIn", true);
-            navigate("/appointments");
+            navigate("/dashboard");
         } else {
             alert("Invalid credentials");
         }
@@ -38,7 +38,7 @@ const login = () => {
                     />
                     <button
                         type="submit"
-                        className="bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                        className="bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-color duration-300 ease-in-out"
                     >
                         Login
                     </button>
@@ -48,4 +48,4 @@ const login = () => {
     );
 }
 
-export default login;
+export default Login;

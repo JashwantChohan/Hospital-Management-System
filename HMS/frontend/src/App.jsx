@@ -12,7 +12,10 @@ import Appointments from "./pages/Appointments";
 import Doctors from "./pages/Doctors";
 import Patients from "./pages/Patients";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Reports from "./pages/Reports";
 import "./App.css";
+
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,17 +23,28 @@ const Navbar = () => {
   const isLinkActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn"); 
-    navigate("/login"); 
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login");
   };
 
+
+
   return (
-    <nav className="bg-[#00a7aa] p-2.5 rounded-xl mb-4 flex justify-between items-center">
+    <nav className="bg-blue-600 p-2.5 rounded-xl mb-4 flex justify-between items-center">
       <ul className="list-none flex p-0 m-0">
         <li className="mr-[20px]">
           <Link
+            to="/dashboard"
+            className={`no-underline font-bold ${isLinkActive("/dashboard") ? "text-[#fff]" : "text-white"
+              }`}
+          >
+            Dashboard
+          </Link>
+        </li>
+        <li className="mr-[20px]">
+          <Link
             to="/appointments"
-            className={`no-underline font-bold ${isLinkActive("/appointments") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/appointments") ? "text-[#fff]" : "text-white"
               }`}
           >
             Appointments
@@ -39,7 +53,7 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/doctors"
-            className={`no-underline font-bold ${isLinkActive("/doctors") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/doctors") ? "text-[#fff]" : "text-white"
               }`}
           >
             Doctors
@@ -48,24 +62,32 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/patients"
-            className={`no-underline font-bold ${isLinkActive("/patients") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/patients") ? "text-[#fff]" : "text-white"
               }`}
           >
             Patients
+          </Link>
+        </li>
+        <li className="mr-[20px]">
+          <Link
+            to="/reports"
+            className={`no-underline font-bold ${isLinkActive("/reports") ? "text-[#fff]" : "text-white"
+              }`}
+          >
+            Reports
           </Link>
         </li>
       </ul>
 
       <button
         onClick={handleLogout}
-        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+        className="bg-red-600 text-white px-5 py-2 rounded hover:bg-red-500 transition-color duration-300 ease-in-out"
       >
         Logout
       </button>
     </nav>
   );
 };
-
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -83,6 +105,18 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
 
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <Navbar />
+                <PrivateRoute>
+                  <Patients />
+                  <Dashboard />
+                </PrivateRoute>
+              </>
+            }
+          />
           <Route
             path="/appointments"
             element={
@@ -116,11 +150,21 @@ const App = () => {
               </>
             }
           />
-
-          <Route path="/" element={<Navigate to="/login" />} />
-        </Routes>
-      </div>
-    </Router>
+          <Route
+            path="/reports"
+            element={
+              <>
+                <Navbar />
+                <PrivateRoute>
+                  <Reports />
+                </PrivateRoute>
+              </>
+            }
+          />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+        </Routes >
+      </div >
+    </Router >
   );
 };
 
