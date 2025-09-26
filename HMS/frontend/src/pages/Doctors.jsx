@@ -4,34 +4,42 @@ import DoctorCard from "../components/DoctorCard";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState({
-    mainDoctor: { name: "", speciality: "", address: "", fees: "" },
-    assistantDoctor: { name: "", speciality: "", address: "", fees: "" },
-    activeDoctor: "mainDoctor", // track who is currently active
+    mainDoctor: { name: "Dr Chuni Lal", speciality: "Psychaitrist", address: "Dr Plaza", fees: "2000" },
+    assistantDoctor: { name: "Dr Ahmed (Assistant)", speciality: "Psychaitrist", address: "Dr Plaza", fees: "2000" },
+    activeDoctor: "mainDoctor",
   });
 
   const [isEditMode, setIsEditMode] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/doctors")
-      .then((response) => {
-        if (response.data) {
-          setDoctors(response.data);
-        }
-      })
-      .catch((error) => console.error("Error fetching doctors", error));
-  }, []);
+  // Dummy Data
+
+
+
+  // ////////////////// This is for backend//////////////////////////
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/doctors")
+  //     .then((response) => {
+  //       if (response.data) {
+  //         setDoctors(response.data);
+  //       }
+  //     })
+  //     .catch((error) => console.error("Error fetching doctors", error));
+  // }, []);
 
   const handleUpdateDoctor = (role, e) => {
     e.preventDefault();
 
-    axios
-      .post(`http://localhost:5000/doctors/update/${role}`, doctors[role])
-      .then((response) => {
-        console.log("Updated doctor:", response.data);
-        setIsEditMode(false);
-      })
-      .catch((error) => console.error("Error updating doctor", error));
+    alert(`${role} updated successfully (dummy only, no backend yet)!`);
+    setIsEditMode(false);
+
+    // axios
+    //   .post(`http://localhost:5000/doctors/update/${role}`, doctors[role])
+    //   .then((response) => {
+    //     console.log("Updated doctor:", response.data);
+    //     setIsEditMode(false);
+    //   })
+    //   .catch((error) => console.error("Error updating doctor", error));
   };
 
   const handleChange = (role, field, value) => {
@@ -41,26 +49,32 @@ const Doctors = () => {
     }));
   };
 
-  // Assign Assistant Doctor
   const handleAssignAssistant = () => {
-    axios
-      .post("http://localhost:5000/doctors/assign", { activeDoctor: "assistantDoctor" })
-      .then(() => {
-        setDoctors((prev) => ({ ...prev, activeDoctor: "assistantDoctor" }));
-        alert("Assistant Doctor assigned successfully!");
-      })
-      .catch((err) => console.error(err));
+    setDoctors((prev) => ({ ...prev, activeDoctor: "assistantDoctor" }));
+    alert("Assistant Doctor assigned successfully! (dummy)");
+
+    // axios
+    //   .post("http://localhost:5000/doctors/assign", { activeDoctor: "assistantDoctor" })
+    //   .then(() => {
+    //     setDoctors((prev) => ({ ...prev, activeDoctor: "assistantDoctor" }));
+    //     alert("Assistant Doctor assigned successfully!");
+    //   })
+    //   .catch((err) => console.error(err));
   };
 
-  // Reassign Main Doctor
+
   const handleReassignMainDoctor = () => {
-    axios
-      .post("http://localhost:5000/doctors/assign", { activeDoctor: "mainDoctor" })
-      .then(() => {
-        setDoctors((prev) => ({ ...prev, activeDoctor: "mainDoctor" }));
-        alert("Reassigned to Main Doctor!");
-      })
-      .catch((err) => console.error(err));
+    setDoctors((prev) => ({ ...prev, activeDoctor: "mainDoctor" }));
+    alert("Reassigned to Main Doctor! (dummy)");
+
+
+    // axios
+    //   .post("http://localhost:5000/doctors/assign", { activeDoctor: "mainDoctor" })
+    //   .then(() => {
+    //     setDoctors((prev) => ({ ...prev, activeDoctor: "mainDoctor" }));
+    //     alert("Reassigned to Main Doctor!");
+    //   })
+    //   .catch((err) => console.error(err));
   };
 
   return (

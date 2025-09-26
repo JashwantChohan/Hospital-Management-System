@@ -14,54 +14,85 @@ const Appointments = () => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/appointments')
-      .then((response) => setAppointments(response.data))
-      .catch((error) => console.error('Error fetching appointments:', error));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:5000/appointments')
+  //     .then((response) => setAppointments(response.data))
+  //     .catch((error) => console.error('Error fetching appointments:', error));
+  // }, []);
 
   const handleAddAppointment = (e) => {
     e.preventDefault();
 
-    axios
-      .post('http://localhost:5000/appointments/add', newAppointment)
-      .then((response) => {
-        setAppointments([...appointments, response.data]);
-        setNewAppointment({
-          patientName: '',
-          doctorName: '',
-          date: '',
-          address: '',
-          fees: ''
-        });
-      })
-      .catch((error) => console.error('Error adding appointment:', error));
+    const newApp = {
+      id: Date.now(),
+      ...newAppointment,
+    };
+    setAppointments([...appointments, newApp]);
+    setNewAppointment({
+      patientName: "",
+      doctorName: "",
+      date: "",
+      address: "",
+      fees: "",
+    });
+
+    // axios
+    //   .post('http://localhost:5000/appointments/add', newAppointment)
+    //   .then((response) => {
+    //     setAppointments([...appointments, response.data]);
+    //     setNewAppointment({
+    //       patientName: '',
+    //       doctorName: '',
+    //       date: '',
+    //       address: '',
+    //       fees: ''
+    //     });
+    //   })
+    //   .catch((error) => console.error('Error adding appointment:', error));
   };
 
   const handleUpdateAppointment = (id, e) => {
     e.preventDefault();
 
-    axios
-      .post(`http://localhost:5000/appointments/update/${id}`, selectedAppointment)
-      .then((response) => {
-        const updatedApp = { ...selectedAppointment, _id: id };
-        setAppointments(
-          appointments.map((a) => (a._id === id ? updatedApp : a))
-        );
-        setSelectedAppointment(null);
-        setIsEditMode(false);
-      })
-      .catch((error) => console.error('Error updating appointment:', error));
+    const newApp = {
+      ...newAppointment,
+      id: Date.now().toString(), // ✅ give unique id
+    };
+
+    setAppointments([...appointments, newApp]);
+    setNewAppointment({
+      patientName: '',
+      doctorName: '',
+      date: '',
+      address: '',
+      fees: '',
+    });
+
+    // axios
+    //   .post(`http://localhost:5000/appointments/update/${id}`, selectedAppointment)
+    //   .then((response) => {
+    //     const updatedApp = { ...selectedAppointment, _id: id };
+    //     setAppointments(
+    //       appointments.map((a) => (a._id === id ? updatedApp : a))
+    //     );
+    //     setSelectedAppointment(null);
+    //     setIsEditMode(false);
+    //   })
+    //   .catch((error) => console.error('Error updating appointment:', error));
   };
 
   const handleDeleteAppointment = (id) => {
-    axios
-      .delete(`http://localhost:5000/appointments/delete/${id}`)
-      .then(() => {
-        setAppointments(appointments.filter((a) => a._id !== id));
-      })
-      .catch((error) => console.error('Error deleting appointment:', error));
+
+    setAppointments(appointments.filter((a) => a.id !== id));
+    alert("Appointment deleted (dummy only).");
+
+    // axios
+    //   .delete(`http://localhost:5000/appointments/delete/${id}`)
+    //   .then(() => {
+    //     setAppointments(appointments.filter((a) => a._id !== id));
+    //   })
+    //   .catch((error) => console.error('Error deleting appointment:', error));
   };
 
   const handleEditAppointment = (appointment) => {
@@ -85,7 +116,6 @@ const Appointments = () => {
               {isEditMode ? 'Edit Appointment' : 'Add New Appointment'}
             </h4>
 
-            {/* Patient Name */}
             <label className="block mb-2">Patient Name:</label>
             <input
               className="w-full p-2 mb-4 border border-blue-500 rounded-[4px]"
@@ -96,14 +126,13 @@ const Appointments = () => {
               onChange={(e) =>
                 isEditMode
                   ? setSelectedAppointment({
-                      ...selectedAppointment,
-                      patientName: e.target.value
-                    })
+                    ...selectedAppointment,
+                    patientName: e.target.value
+                  })
                   : setNewAppointment({ ...newAppointment, patientName: e.target.value })
               }
             />
 
-            {/* Doctor Name */}
             <label className="block mb-2">Doctor Name:</label>
             <input
               className="w-full p-2 mb-4 border border-blue-500 rounded-[4px]"
@@ -114,14 +143,13 @@ const Appointments = () => {
               onChange={(e) =>
                 isEditMode
                   ? setSelectedAppointment({
-                      ...selectedAppointment,
-                      doctorName: e.target.value
-                    })
+                    ...selectedAppointment,
+                    doctorName: e.target.value
+                  })
                   : setNewAppointment({ ...newAppointment, doctorName: e.target.value })
               }
             />
 
-            {/* Date */}
             <label className="block mb-2">Date:</label>
             <input
               className="w-full p-2 mb-4 border border-blue-500 rounded-[4px]"
@@ -134,7 +162,6 @@ const Appointments = () => {
               }
             />
 
-            {/* Address */}
             <label className="block mb-2">Address:</label>
             <input
               className="w-full p-2 mb-4 border border-blue-500 rounded-[4px]"
@@ -143,14 +170,13 @@ const Appointments = () => {
               onChange={(e) =>
                 isEditMode
                   ? setSelectedAppointment({
-                      ...selectedAppointment,
-                      address: e.target.value
-                    })
+                    ...selectedAppointment,
+                    address: e.target.value
+                  })
                   : setNewAppointment({ ...newAppointment, address: e.target.value })
               }
             />
 
-            {/* Fees */}
             <label className="block mb-2">Fees:</label>
             <input
               className="w-full p-2 mb-4 border border-blue-500 rounded-[4px]"
@@ -159,9 +185,9 @@ const Appointments = () => {
               onChange={(e) =>
                 isEditMode
                   ? setSelectedAppointment({
-                      ...selectedAppointment,
-                      fees: e.target.value
-                    })
+                    ...selectedAppointment,
+                    fees: e.target.value
+                  })
                   : setNewAppointment({ ...newAppointment, fees: e.target.value })
               }
             />
@@ -176,13 +202,12 @@ const Appointments = () => {
         </div>
       </div>
 
-      {/* Appointment List */}
       <div className="appointments flex flex-col items-center min-h-screen w-[30vw]">
         <h3>Appointments ({appointments.length})</h3>
         <div className="appointment-list flex flex-col items-center mb-[250px]">
           {appointments.map((appointment) => (
             <AppointmentCard
-              key={appointment._id}
+              key={appointment.id ?? appointment._id}   
               appointment={appointment}
               onEdit={handleEditAppointment}
               onDelete={handleDeleteAppointment}

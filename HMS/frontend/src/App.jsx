@@ -30,12 +30,12 @@ const Navbar = () => {
 
 
   return (
-    <nav className="bg-[#00a7aa] p-2.5 rounded-xl mb-4 flex justify-between items-center">
+    <nav className="bg-blue-600 p-2.5 rounded-xl mb-4 flex justify-between items-center">
       <ul className="list-none flex p-0 m-0">
         <li className="mr-[20px]">
           <Link
             to="/dashboard"
-            className={`no-underline font-bold ${isLinkActive("/dashboard") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/dashboard") ? "text-[#fff]" : "text-white"
               }`}
           >
             Dashboard
@@ -44,7 +44,7 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/appointments"
-            className={`no-underline font-bold ${isLinkActive("/appointments") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/appointments") ? "text-[#fff]" : "text-white"
               }`}
           >
             Appointments
@@ -53,7 +53,7 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/doctors"
-            className={`no-underline font-bold ${isLinkActive("/doctors") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/doctors") ? "text-[#fff]" : "text-white"
               }`}
           >
             Doctors
@@ -62,7 +62,7 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/patients"
-            className={`no-underline font-bold ${isLinkActive("/patients") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/patients") ? "text-[#fff]" : "text-white"
               }`}
           >
             Patients
@@ -71,7 +71,7 @@ const Navbar = () => {
         <li className="mr-[20px]">
           <Link
             to="/reports"
-            className={`no-underline font-bold ${isLinkActive("/reports") ? "text-[#ffd700]" : "text-white"
+            className={`no-underline font-bold ${isLinkActive("/reports") ? "text-[#fff]" : "text-white"
               }`}
           >
             Reports
@@ -81,7 +81,7 @@ const Navbar = () => {
 
       <button
         onClick={handleLogout}
-        className="bg-red-500 text-white px-5 py-2 rounded hover:bg-red-600 transition-color duration-300 ease-in-out"
+        className="bg-red-600 text-white px-5 py-2 rounded hover:bg-red-500 transition-color duration-300 ease-in-out"
       >
         Logout
       </button>

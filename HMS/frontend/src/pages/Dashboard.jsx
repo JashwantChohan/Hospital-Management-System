@@ -1,25 +1,87 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div className="flex h-screen">
-     
-      <div className="w-64 bg-blue-600 text-white p-6">
-        <h2 className="text-xl font-bold mb-6">Clinic HMS</h2>
-        <ul className="flex flex-col space-y-4">
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/appointments">Appointments</Link></li>
-          <li><Link to="/patients">Patients</Link></li>
-          <li><Link to="/doctors">Doctor</Link></li>
-          <li><Link to="/reports">Reports</Link></li>
-          <li><Link to="/login">Logout</Link></li>
+    <div className="flex h-screen gap-2.5 rounded-[4px]">
+      <div className="w-[25%] bg-[#d3d3d3] text-white p-6 rounded-[4px]">
+        <h2 className="text-xl text-[#3b3b3b] font-bold mb-6">Clinic HMS</h2>
+        <ul className="flex flex-col space-y-2">
+          <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#8e8c8c] text-[#fff] rounded px-3 py-2 block"
+                  : "text-white hover:bg-[#8e8c8c]rounded px-3 py-2 block"
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/appointments"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#8e8c8c] text-white rounded px-3 py-2 block"
+                  : "text-white hover:bg-[#8e8c8c] rounded px-3 py-2 block"
+              }
+            >
+              Appointments
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/patients"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#8e8c8c] text-white rounded px-3 py-2 block"
+                  : "text-white hover:bg-[#8e8c8c] rounded px-3 py-2 block"
+              }
+            >
+              Patients
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/doctors"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#8e8c8c] text-white rounded px-3 py-2 block"
+                  : "text-white hover:bg-[#8e8c8c] rounded px-3 py-2 block"
+              }
+            >
+              Doctor
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/reports"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-[#8e8c8c] text-white rounded px-3 py-2 block"
+                  : "text-white hover:bg-[#8e8c8c] rounded px-3 py-2 block"
+              }
+            >
+              Reports
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/login"
+              className="text-white hover:bg-[#8e8c8c] rounded px-3 py-2 block"
+            >
+              Logout
+            </NavLink>
+          </li>
         </ul>
+
       </div>
 
       <div className="flex-1 p-6 bg-gray-100">
         <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white shadow rounded-lg p-6">
             <h3 className="text-gray-700">Today’s Appointments</h3>
