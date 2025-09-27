@@ -11,35 +11,9 @@ const Doctors = () => {
 
   const [isEditMode, setIsEditMode] = useState(false);
 
-  // Dummy Data
-
-
-
-  // ////////////////// This is for backend//////////////////////////
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:5000/doctors")
-  //     .then((response) => {
-  //       if (response.data) {
-  //         setDoctors(response.data);
-  //       }
-  //     })
-  //     .catch((error) => console.error("Error fetching doctors", error));
-  // }, []);
-
   const handleUpdateDoctor = (role, e) => {
     e.preventDefault();
-
     alert(`${role} updated successfully (dummy only, no backend yet)!`);
-    setIsEditMode(false);
-
-    // axios
-    //   .post(`http://localhost:5000/doctors/update/${role}`, doctors[role])
-    //   .then((response) => {
-    //     console.log("Updated doctor:", response.data);
-    //     setIsEditMode(false);
-    //   })
-    //   .catch((error) => console.error("Error updating doctor", error));
   };
 
   const handleChange = (role, field, value) => {
@@ -52,29 +26,11 @@ const Doctors = () => {
   const handleAssignAssistant = () => {
     setDoctors((prev) => ({ ...prev, activeDoctor: "assistantDoctor" }));
     alert("Assistant Doctor assigned successfully! (dummy)");
-
-    // axios
-    //   .post("http://localhost:5000/doctors/assign", { activeDoctor: "assistantDoctor" })
-    //   .then(() => {
-    //     setDoctors((prev) => ({ ...prev, activeDoctor: "assistantDoctor" }));
-    //     alert("Assistant Doctor assigned successfully!");
-    //   })
-    //   .catch((err) => console.error(err));
   };
 
 
   const handleReassignMainDoctor = () => {
     setDoctors((prev) => ({ ...prev, activeDoctor: "mainDoctor" }));
-    alert("Reassigned to Main Doctor! (dummy)");
-
-
-    // axios
-    //   .post("http://localhost:5000/doctors/assign", { activeDoctor: "mainDoctor" })
-    //   .then(() => {
-    //     setDoctors((prev) => ({ ...prev, activeDoctor: "mainDoctor" }));
-    //     alert("Reassigned to Main Doctor!");
-    //   })
-    //   .catch((err) => console.error(err));
   };
 
   return (
