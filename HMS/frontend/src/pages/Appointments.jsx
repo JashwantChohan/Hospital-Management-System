@@ -14,14 +14,6 @@ const Appointments = () => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
 
-
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:5000/appointments')
-  //     .then((response) => setAppointments(response.data))
-  //     .catch((error) => console.error('Error fetching appointments:', error));
-  // }, []);
-
   const handleAddAppointment = (e) => {
     e.preventDefault();
 
@@ -38,19 +30,6 @@ const Appointments = () => {
       fees: "",
     });
 
-    // axios
-    //   .post('http://localhost:5000/appointments/add', newAppointment)
-    //   .then((response) => {
-    //     setAppointments([...appointments, response.data]);
-    //     setNewAppointment({
-    //       patientName: '',
-    //       doctorName: '',
-    //       date: '',
-    //       address: '',
-    //       fees: ''
-    //     });
-    //   })
-    //   .catch((error) => console.error('Error adding appointment:', error));
   };
 
 
@@ -60,7 +39,7 @@ const Appointments = () => {
 
     const newApp = {
       ...newAppointment,
-      id: Date.now().toString(), // ✅ give unique id
+      id: Date.now().toString(), 
     };
 
     setAppointments([...appointments, newApp]);
@@ -72,17 +51,6 @@ const Appointments = () => {
       fees: '',
     });
 
-    // axios
-    //   .post(`http://localhost:5000/appointments/update/${id}`, selectedAppointment)
-    //   .then((response) => {
-    //     const updatedApp = { ...selectedAppointment, _id: id };
-    //     setAppointments(
-    //       appointments.map((a) => (a._id === id ? updatedApp : a))
-    //     );
-    //     setSelectedAppointment(null);
-    //     setIsEditMode(false);
-    //   })
-    //   .catch((error) => console.error('Error updating appointment:', error));
   };
 
   const handleDeleteAppointment = (id) => {
@@ -90,12 +58,6 @@ const Appointments = () => {
     setAppointments(appointments.filter((a) => a.id !== id));
     alert("Appointment deleted (dummy only).");
 
-    // axios
-    //   .delete(`http://localhost:5000/appointments/delete/${id}`)
-    //   .then(() => {
-    //     setAppointments(appointments.filter((a) => a._id !== id));
-    //   })
-    //   .catch((error) => console.error('Error deleting appointment:', error));
   };
 
   const handleEditAppointment = (appointment) => {

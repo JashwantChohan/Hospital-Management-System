@@ -9,40 +9,35 @@ const Patients = () => {
     const [isEditMode, setIsEditMode] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/patients')
-            .then(response => setPatients(response.data))
-            .catch(error => console.error('Error fetching patients:', error));
+        setPatients([
+            { id: 1, name: "Ali Khan", age: 25, gender: "Male" },
+            { id: 2, name: "Sara Ahmed", age: 30, gender: "Female" },
+        ]);
+
     }, []);
 
     const handleAddPatient = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/patients/add', newPatient)
-            .then(response => {
-                setPatients([...patients, response.data]);
-                setNewPatient({ name: '', age: '', gender: '' });
-            })
-            .catch(error => console.error('Error adding patient:', error));
+        const newPat = { id: Date.now(), ...newPatient };
+        setPatients([...patients, newPat]);
+        setNewPatient({ name: "", age: "", gender: "" });
     };
 
     const handleUpdatePatient = (id, e) => {
         e.preventDefault();
-        axios.post(`http://localhost:5000/patients/update/${id}`, selectedPatient)
-            .then(response => {
-                const updatedPat = { ...selectedPatient, _id: id };
-                setPatients(patients.map(patient => (patient._id === id ? updatedPat : patient)));
-                setSelectedPatient(null);
-                setIsEditMode(false);
-            })
-            .catch(error => console.error('Error updating patient:', error));
+        setPatients(
+            patients.map((pat) =>
+                pat.id === id ? { ...selectedPatient, id } : pat
+            )
+        );
+        setSelectedPatient(null);
+        setIsEditMode(false);
     };
 
     const handleDeletePatient = (id) => {
-        axios.delete(`http://localhost:5000/patients/delete/${id}`)
-            .then(() => {
-                setPatients(patients.filter(patient => patient._id !== id));
-                setSelectedPatient(null);
-            })
-            .catch(error => console.error('Error deleting patient:', error));
+        setPatients(patients.filter((pat) => pat.id !== id));
+        setSelectedPatient(null);
+        alert("Patient deleted (dummy only).");
     };
 
     const handleEditPatient = (patient) => {
@@ -52,7 +47,7 @@ const Patients = () => {
 
     return (
         <div className="main-patient-container flex flex-wrap justify-center items-start">
-           
+
             <div className="form-sections bg-[#fff] border-2 border-gray-300 rounded-[8px] p-4 w-[45%] mb-[306px] shadow-md">
                 <h4 className="mb-4 text-center text-2xl">{isEditMode ? 'Edit Patient' : 'Add New Patient'}</h4>
                 <form className="flex flex-col" onSubmit={isEditMode ? (e) => handleUpdatePatient(selectedPatient._id, e) : handleAddPatient}>
